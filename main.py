@@ -9,7 +9,9 @@ def save_credentials():
     credentials_handler.add_website(gui.website_input.get())
     credentials_handler.add_password(gui.password_input.get())
     credentials_handler.add_username(gui.username_input.get())
-    credentials_handler.print_credentials()
+
+    print(credentials_handler.export_credentials_as_dataframe())
+
 
 
 if __name__ == '__main__':
