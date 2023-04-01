@@ -1,4 +1,9 @@
 import tkinter
+import tkinter.messagebox
+
+
+def popup_empty_field():
+    tkinter.messagebox.showerror(title="Oops", message=f"Please do not leave any fields empty")
 
 
 class PasswordManager:
@@ -53,3 +58,23 @@ class PasswordManager:
 
     def clear_website_input(self):
         self.website_input.delete(0, tkinter.END)
+
+    def popup_save_confirmation(self):
+        is_confirmed = tkinter.messagebox.askokcancel(title=self.get_website(),
+                                                      message=f"Credentials entered:"
+                                                              f"\n username: {self.get_username()}"
+                                                              f"\n password: {self.get_password()}"
+                                                              f"\n Is this ok?")
+        return is_confirmed
+
+    def inputs_valid(self):
+        if self.get_password() == "":
+            popup_empty_field()
+            return False
+        elif self.get_username() == "":
+            popup_empty_field()
+            return False
+        elif self.get_website() == "":
+            popup_empty_field()
+            return False
+        return True
