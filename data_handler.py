@@ -1,5 +1,6 @@
 import pandas
 
+
 class DataHandler:
     def __init__(self):
         self.websites = []
@@ -15,14 +16,22 @@ class DataHandler:
     def add_username(self, username_input):
         self.usernames.append(username_input)
 
-    def export_credentials_as_dataframe(self):
+    def export_as_dataframe(self):
         dataframe = pandas.DataFrame()
         dataframe["website"] = self.websites
         dataframe["username"] = self.usernames
         dataframe["password"] = self.passwords
         return dataframe
 
+    def read_from_csv(self):
+        dataframe = pandas.read_csv("credentials.csv")
+        self.websites = dataframe["website"].tolist()
+        self.passwords = dataframe["password"].tolist()
+        self.usernames = dataframe["username"].tolist()
 
+    def export_to_csv(self):
+        credentials = self.export_as_dataframe()
+        credentials.to_csv("credentials.csv")
 
     def print_credentials(self):
         print(self.usernames)

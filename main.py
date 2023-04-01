@@ -5,12 +5,11 @@ import data_handler
 import graphical_user_interface
 
 
-def save_credentials():
+def save_new_credentials():
     credentials_handler.add_website(gui.website_input.get())
     credentials_handler.add_password(gui.password_input.get())
     credentials_handler.add_username(gui.username_input.get())
-
-    print(credentials_handler.export_credentials_as_dataframe())
+    credentials_handler.export_to_csv()
 
 
 
@@ -21,7 +20,9 @@ if __name__ == '__main__':
     gui.set_default_behaviour()
 
     credentials_handler = data_handler.DataHandler()
-
-    gui.add_button.configure(command=save_credentials)
+    credentials_handler.read_from_csv()
+    credentials_handler.print_credentials()
+    gui.add_button.configure(command=save_new_credentials)
 
     gui.screen.mainloop()
+
