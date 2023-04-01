@@ -47,3 +47,9 @@ class PasswordManager:
 
     def get_website(self):
         return self.website_input.get()
+
+    def clear_password_input(self):
+        self.password_input.delete(0, tkinter.END)
+
+    def clear_website_input(self):
+        self.website_input.delete(0, tkinter.END)
