@@ -1,6 +1,6 @@
 # Password Generator Project
 import random
-
+import pyperclip
 
 class PasswordGenerator:
 
@@ -21,14 +21,18 @@ class PasswordGenerator:
         self.nr_numbers = numbers
 
     def generate_password(self):
-        for letter in range(self.nr_letters):
-            self.password_list.append(random.choice(self.seed_letters))
-        for symbol in range(self.nr_symbols):
-            self.password_list.append(random.choice(self.seed_symbols))
-        for number in range(self.nr_numbers):
-            self.password_list.append(random.choice(self.seed_numbers))
+        password_letters = [random.choice(self.seed_letters) for letter in range(self.nr_letters)]
+        symbol_letters = [random.choice(self.seed_symbols) for symbol in range(self.nr_symbols)]
+        number_letters = [random.choice(self.seed_numbers) for number in range(self.nr_numbers)]
+        self.password_list = password_letters + symbol_letters + number_letters
+        # for letter in range(self.nr_letters):
+        #     self.password_list.append(random.choice(self.seed_letters))
+        # for symbol in range(self.nr_symbols):
+        #     self.password_list.append(random.choice(self.seed_symbols))
+        # for number in range(self.nr_numbers):
+        #     self.password_list.append(random.choice(self.seed_numbers))
         random.shuffle(self.password_list)
-        print(self.get_password_as_string())
+        pyperclip.copy(self.get_password_as_string())
 
     def get_password_as_string(self):
         password = ""

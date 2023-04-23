@@ -3,6 +3,8 @@ import graphical_user_interface
 import password_generator
 
 
+
+
 def save_new_credentials():
     if gui.inputs_valid():
         credentials_handler.add_website(gui.get_website())
