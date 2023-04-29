@@ -12,7 +12,7 @@ def save_new_credentials():
         credentials_handler.add_password(gui.get_password())
 
         if gui.popup_save_confirmation():
-            credentials_handler.export_to_csv()
+            credentials_handler.export_to_json()
         gui.clear_password_input()
         gui.clear_website_input()
 
@@ -32,8 +32,7 @@ if __name__ == '__main__':
     gui.set_default_behaviour()
 
     credentials_handler = data_handler.DataHandler()
-    credentials_handler.read_from_csv()
-    credentials_handler.print_credentials()
+    credentials_handler.read_from_json()
 
     password_handler = password_generator.PasswordGenerator()
 
