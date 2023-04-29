@@ -2,6 +2,7 @@ import pandas
 import os
 import json
 
+
 class DataHandler:
     def __init__(self):
         self.websites = []
@@ -46,22 +47,16 @@ class DataHandler:
             self.passwords = [entry["password"] for entry in credentials_list]
             self.usernames = [entry["username"] for entry in credentials_list]
 
-
-
-
     def export_to_csv(self):
         credentials = self.export_as_dataframe()
         credentials.to_csv("credentials.csv")
 
     def export_to_json(self):
         credentials_df = self.export_as_dataframe()
-        credentials_json = credentials_df.to_json(orient= "records")
+        credentials_json = credentials_df.to_json(orient="records")
         credentials_json_parsed = json.loads(credentials_json)
         with open("credentials.json", "w") as credentials_file:
             json.dump(credentials_json_parsed, credentials_file, indent=4)
-
-
-
 
     def print_credentials(self):
         print(self.usernames)

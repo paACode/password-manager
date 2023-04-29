@@ -3,8 +3,6 @@ import graphical_user_interface
 import password_generator
 
 
-
-
 def save_new_credentials():
     if gui.inputs_valid():
         credentials_handler.add_website(gui.get_website())
@@ -25,6 +23,22 @@ def create_password():
     gui.password_input.insert(0, string=password_handler.get_password_as_string())
 
 
+def search_credentials():
+    credentials_handler.read_from_json()
+    try:
+        search_website = gui.get_website()
+        index = credentials_handler.websites.index(search_website)
+
+    except ValueError:
+        graphical_user_interface.popup_website_not_found(website=search_website)
+    else:
+        website = credentials_handler.websites[index]
+        password = credentials_handler.passwords[index]
+        username = credentials_handler.usernames[index]
+        graphical_user_interface.popup_found_credentials(found_website=website, found_username=username,
+                                                         found_pw=password)
+
+
 if __name__ == '__main__':
     gui = graphical_user_interface.PasswordManager()
     gui.add_logo_to_canvas()
@@ -38,6 +52,7 @@ if __name__ == '__main__':
 
     gui.add_button.configure(command=save_new_credentials)
     gui.generate_button.configure(command=create_password)
+    gui.search_button.configure(command=search_credentials)
     #
 
     gui.screen.mainloop()

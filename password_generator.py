@@ -2,6 +2,7 @@
 import random
 import pyperclip
 
+
 class PasswordGenerator:
 
     def __init__(self):
