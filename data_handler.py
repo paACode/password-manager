@@ -32,13 +32,22 @@ class DataHandler:
             self.usernames = dataframe["username"].tolist()
 
     def read_from_json(self):
-        if os.path.isfile("credentials.json"):
+        try:
             with open("credentials.json", "r") as credentials_file:
                 credentials_list = json.load(credentials_file)
+        except FileNotFoundError:
+            with open("credentials.json", "w"):
+                print("empty credentials.json created")
+        except json.JSONDecodeError:
+            pass
 
+        else:
             self.websites = [entry["website"] for entry in credentials_list]
             self.passwords = [entry["password"] for entry in credentials_list]
             self.usernames = [entry["username"] for entry in credentials_list]
+
+
+
 
     def export_to_csv(self):
         credentials = self.export_as_dataframe()
